@@ -30,12 +30,12 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/deleteDepartment/{departmentId}")
-    public Long deleteDepartment(@PathVariable Long departmentId){
+    public Long deleteDepartment(@PathVariable Long departmentId) {
         return departmentService.deleteDepartment(departmentId);
     }
 
     @GetMapping("/department/all")
-    public List<DepartmentDto> getAllDepartments(){
+    public List<DepartmentDto> getAllDepartments() {
         return departmentService.getDepartments();
     }
 
