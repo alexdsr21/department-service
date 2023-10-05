@@ -2,7 +2,7 @@ server:
   port: 9001
 spring:
   datasource:
-    url: jdbc:h2:mem:javatpoint
+    url: jdbc:h2:mem:department
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -11,3 +11,5 @@ spring:
   h2:
     console:
       enabled: true
+      settings:
+        web-allow-others: false

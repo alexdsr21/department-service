@@ -5,11 +5,15 @@ import com.sample.micro.departmentservice.dto.DepartmentDto;
 import com.sample.micro.departmentservice.entity.Department;
 import com.sample.micro.departmentservice.exception.EmptyInputException;
 import com.sample.micro.departmentservice.repository.DepartmentRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,11 +22,20 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final DepartmentRepository departmentRepository;
-    private final DepartmentConverter departmentConverter;
+
+    private DepartmentRepository departmentRepository;
+    private DepartmentConverter departmentConverter;
+
+    public DepartmentServiceImpl() {
+    }
+
+    @Autowired
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentConverter departmentConverter) {
+        this.departmentRepository = departmentRepository;
+        this.departmentConverter = departmentConverter;
+    }
 
     @Override
     public DepartmentDto getDepartment(Long departmentId) {
@@ -36,7 +49,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<DepartmentDto> getDepartments() {
-        return departmentRepository.findAll().stream().map(department -> departmentConverter.toDto(department)).collect(Collectors.toList());
+
+        Optional<List<Department>> allDepartments = Optional.ofNullable(departmentRepository.findAll());
+        if(allDepartments.isPresent() && allDepartments.get().isEmpty()){
+            throw new NoSuchElementException();
+        }else{
+            return allDepartments.get().stream().map(department -> departmentConverter.toDto(department)).collect(Collectors.toList());
+        }
+
     }
 
     @Override

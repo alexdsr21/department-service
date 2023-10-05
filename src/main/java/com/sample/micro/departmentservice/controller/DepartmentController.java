@@ -34,7 +34,7 @@ public class DepartmentController {
         return departmentService.deleteDepartment(departmentId);
     }
 
-    @GetMapping("/department/all")
+    @GetMapping("/all")
     public List<DepartmentDto> getAllDepartments() {
         return departmentService.getDepartments();
     }
