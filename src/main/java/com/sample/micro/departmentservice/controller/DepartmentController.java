@@ -5,6 +5,8 @@ import com.sample.micro.departmentservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/department")
 @RequiredArgsConstructor
@@ -31,4 +33,10 @@ public class DepartmentController {
     public Long deleteDepartment(@PathVariable Long departmentId){
         return departmentService.deleteDepartment(departmentId);
     }
+
+    @GetMapping("/department/all")
+    public List<DepartmentDto> getAllDepartments(){
+        return departmentService.getDepartments();
+    }
+
 }

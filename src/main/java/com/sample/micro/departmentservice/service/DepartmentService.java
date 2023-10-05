@@ -46,4 +46,5 @@ public interface DepartmentService {
      * @return the long
      */
     Long deleteDepartment(Long departmentId);
+
 }
