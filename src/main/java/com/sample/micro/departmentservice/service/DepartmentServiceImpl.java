@@ -45,8 +45,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto updateDepartment(DepartmentDto departmentDto, Long departmentId) {
-        Optional<Department> optionalDepartment = departmentRepository.findById(departmentId);
+    public DepartmentDto updateDepartment(DepartmentDto departmentDto) {
+        Optional<Department> optionalDepartment = departmentRepository.findById(departmentDto.getDepartmentId());
         if (!optionalDepartment.isPresent()) {
             throw new EmptyInputException("601", "Empty input exception");
         }

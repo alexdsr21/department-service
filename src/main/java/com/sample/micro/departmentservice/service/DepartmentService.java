@@ -35,10 +35,9 @@ public interface DepartmentService {
      * Update department department dto.
      *
      * @param departmentDto the department dto
-     * @param departmentId  the department id
      * @return the department dto
      */
-    DepartmentDto updateDepartment(DepartmentDto departmentDto, Long departmentId);
+    DepartmentDto updateDepartment(DepartmentDto departmentDto);
 
     /**
      * Delete department long.
